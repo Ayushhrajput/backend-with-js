@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://yt-app-qqcw.onrender.com"
+        target: "http://localhost:8000"
       }
     }
   },

@@ -1,7 +1,12 @@
 import axios from "axios";
 
+
 const registerUser = async (formData, avatar, coverImage) => {
+    
+
     try {
+        const API_URL = import.meta.env.VITE_API_URL
+
         const data = new FormData()
         
         data.append("fullName", formData.fullName)
@@ -12,10 +17,9 @@ const registerUser = async (formData, avatar, coverImage) => {
         data.append("avatar", avatar)
         
         if(coverImage) data.append("coverImage", coverImage)
-    
-    
+     
         const response = await axios.post(
-            "/api/v1/users/register",
+            `${API_URL}/api/v1/users/register`,
             data,
             {
                 withCredentials: true
@@ -23,7 +27,7 @@ const registerUser = async (formData, avatar, coverImage) => {
         )
         return response.data
     } catch (e) {
-        throw new Error(e.response?.data?.message || "something went wrong")
+        throw new Error(e.response?.data?.message || e.message || "something went wrong")
     }
     
 }

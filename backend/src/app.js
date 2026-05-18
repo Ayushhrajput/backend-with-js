@@ -4,10 +4,12 @@ import cors from "cors";
 export const app = express();
 
 
-
-console.log(process.env.CORS_ORIGIN)
+const allowedOrigins = [
+    "https://yt-app-taupe.vercel.app/",
+    "http://localhost:8000"
+]
 app.use(cors({
-    origin: process.env.CORS_ORIGIN,
+    origin: allowedOrigins,
     credentials: true
 }))
 app.use(cookieParser());
