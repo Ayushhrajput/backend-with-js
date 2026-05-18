@@ -31,8 +31,10 @@ function RegisterUser() {
                 avatar,
                 coverImage
             )
+            console.log("response", response)
             setSuccess(response.message)
         } catch (err) {
+            console.log("this err", err)
             setError(err.message)
         }
     }

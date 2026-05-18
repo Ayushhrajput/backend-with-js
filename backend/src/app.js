@@ -5,8 +5,8 @@ export const app = express();
 
 
 const allowedOrigins = [
-    "https://yt-app-taupe.vercel.app/",
-    "http://localhost:8000"
+    "https://yt-app-taupe.vercel.app",
+    "http://localhost:5173"
 ]
 app.use(cors({
     origin: allowedOrigins,
@@ -23,3 +23,10 @@ app.use(express.static("public"))
 import userRouter from "./routes/user.routes.js";
 
 app.use("/api/v1/users", userRouter);
+
+app.use((err, req, res, next) => {
+    return res.status(err.statusCode || 500).json({
+        success: false,
+        message: err.message || "internal server error"
+    })
+})
