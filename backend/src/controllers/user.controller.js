@@ -44,13 +44,12 @@ const registerUser = asyncHandler( async (req, res) => {
         $or: [{username}, {email}]
     })
 
-    if(existedUser) throw new ApiError(409, "user already exists")
-        
-    const avatarLocalPath = req.files?.avatar[0]?.path
+    if(existedUser) throw new ApiError(409, "user already exists")   
+    const avatarLocalPath = req.files?.avatar?.[0]?.path
 
 
     
-    const coverImageLocalPath = req.files?.coverImage[0]?.path
+    const coverImageLocalPath = req.files?.coverImage?.[0]?.path
  
 
     if(!avatarLocalPath) throw new ApiError(400, "avatar is required")
@@ -149,10 +148,10 @@ const refreshAccessToken = asyncHandler( async (req, res) => {
     try {
         const getRefreshToken = req.cookies.refreshToken || req.body.refreshToken
     
-        if(!getrefreshToken) {
+        if(!getRefreshToken) {
             throw new ApiError(401, "unauthorized access")
         }
-        const decodedToken = jwt.verify(getrefreshToken, process.env.REFRESH_TOKEN_SECRET)
+        const decodedToken = jwt.verify(getRefreshToken, process.env.REFRESH_TOKEN_SECRET)
         const user = await User.findById(decodedToken._id)
     
         if(!user) throw new ApiError(401, "INVALID REFERSH TOKEN")
@@ -169,7 +168,7 @@ const refreshAccessToken = asyncHandler( async (req, res) => {
         const {accessToken, newRefreshToken} = await generateAccessAndRefreshToken(user._id)
     
         return res.status(200)
-        .cookie("accessToken", AccessToken)
+        .cookie("accessToken", accessToken)
         .cookie("refreshToken", newRefreshToken)
         .json(
             200,
@@ -238,7 +237,7 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
     
     if(!avatarLocalPath) throw new ApiError(400, "avatar file is not found")
 
-    const user = await User.findById(res.user._id)
+    const user = await User.findById(req.user._id)
     
     if(user.avatarPublicId){
         await cloudinary.uploader.destroy(user.avatarPublicId)
@@ -374,11 +373,11 @@ const getWatchHistory = asyncHandler(async (req, res) => {
                             localField: "owner",
                             foreignField: "_id",
                             as: "owner",
-                            pipleline: [
+                            pipeline: [
                                 {
                                     $project: {
                                         username: 1,
-                                        fullname: 1,
+                                        fullName: 1,
                                         avatar: 1
                                     }
                                 }
@@ -397,7 +396,7 @@ const getWatchHistory = asyncHandler(async (req, res) => {
         }
     ])
 
-    return res.ststus(200)
+    return res.status(200)
     .json(
         new ApiResponse(
             200, 
@@ -413,6 +412,7 @@ export {registerUser,
     changeCurrentPassword,
     getUser,
     updateAccountDetails,
+    updateUserAvatar,
     updateUsercoverImage,
     getUserChannelProfile,
     getWatchHistory
