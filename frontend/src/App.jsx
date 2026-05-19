@@ -29,7 +29,9 @@ function App() {
           <Route path='/register' element={<RegisterUser/>}/>
           <Route path='/login' element={<Login/>}/>
         </Route>
-        <Route path='/home' element={<Home/>}/>
+        <Route path='/home' element={
+          user? <Home/>: <Navigate to="/login"/>
+        }/>
       </Routes>
   )
 }

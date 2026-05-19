@@ -96,9 +96,10 @@ const logout = async () => {
 
 const getCurrUser = async () => {
     try {
-        const response = await api.post(
+        const response = await api.get(
             "/api/v1/users/get-user"
         )
+        return response.data
     } catch (e) {
         throw new Error(e.response?.data?.message || e.message || "something went wrong")
     }
