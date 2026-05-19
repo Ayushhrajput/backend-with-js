@@ -70,7 +70,7 @@ function Login(props) {
                     <button 
                         className="
                             w-full
-                            bg-black
+                            bg-linear-to-tl from-blue-600 to-pink-400
                             hover:bg-gray-800
                             text-white
                             font-semibold

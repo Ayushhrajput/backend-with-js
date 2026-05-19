@@ -12,6 +12,7 @@ export const AuthProvider = ({children}) => {
         const fetchUser = async () => {
             try {
                 const response = await getCurrUser()
+                
                 setUser(response.data)
 
             } catch (e) {

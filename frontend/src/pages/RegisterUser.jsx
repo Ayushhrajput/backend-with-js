@@ -106,7 +106,8 @@ function RegisterUser() {
                                 file:border-0
                                 file:text-sm
                                 file:font-semibold
-                                file:bg-black
+                                file:bg-blue-600
+                                
                                 file:text-white
                                 hover:file:bg-gray-800
                             "
@@ -138,7 +139,7 @@ function RegisterUser() {
                                 file:border-0
                                 file:text-sm
                                 file:font-semibold
-                                file:bg-black
+                                file:bg-blue-600
                                 file:text-white
                                 hover:file:bg-gray-800
                             "
@@ -147,7 +148,7 @@ function RegisterUser() {
                     <button 
                         className="
                             w-full
-                            bg-black
+                            bg-linear-to-tl from-blue-600 to-pink-400
                             hover:bg-gray-800
                             text-white
                             font-semibold
