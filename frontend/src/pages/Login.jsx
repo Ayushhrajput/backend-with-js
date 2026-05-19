@@ -27,7 +27,7 @@ function Login(props) {
         try {
             const response = await loginUser(formData)
             
-            setUser(response.data.accessToken)
+            setUser(response.data)
             console.log(response.data)
             navigate('/home')
             setSuccess(response.message)
