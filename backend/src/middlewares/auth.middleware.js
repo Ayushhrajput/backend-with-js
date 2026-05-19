@@ -21,6 +21,6 @@ export const verifyJWT  = asyncHandler( async(req, res, next) => {
         next()
 
     } catch (error) {
-        throw new ApiError(400, error.message || "invalid")
+        throw new ApiError(401, error.message || "invalid")
     }
 })
