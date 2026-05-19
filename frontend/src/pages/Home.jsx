@@ -22,9 +22,14 @@ function Home(props) {
     }
     return (
         <div className='w-full h-screen flex flex-col items-center justify-center bg-linear-to-br from-gray-50 to-gray-100 '>
-            <div className='max-w-sm flex flex-col justify-center gap-4 bg-white p-8 rounded-lg shadow-2xl mx-4'>
+            <div className='max-w-sm flex flex-col  items-start gap-4 bg-white p-8 rounded-lg shadow-2xl mx-4'>
+                <div className='w-full h-15 rounded-lg overflow-hidden   '>
+                    <img src={user.coverImage} alt=""  className='w-full h-full object-cover '/>
+                </div>
                 <div className='flex justify-center items-top gap-4'>
-                    <img src={user.avatar} alt="" className='w-25 h-25 rounded-full'/>
+                    <div className='w-25 h-25 rounded-full overflow-hidden   '>
+                        <img src={user.avatar} alt="" className='w-full h-full object-cover'/>
+                    </div>
                     <div className='mt-4'>
                         <h4>{user.username}</h4>
                     </div>
