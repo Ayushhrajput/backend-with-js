@@ -5,7 +5,7 @@ export const app = express();
 
 
 const allowedOrigins = [
-    "https://yt-app-taupe.vercel.app",
+    "https://yt-app-woq1.vercel.app",
     "http://localhost:5173"
 ]
 app.use(cors({
