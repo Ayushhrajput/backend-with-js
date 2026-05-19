@@ -1,10 +1,36 @@
 import React from 'react';
 import { useAuth } from '../context/AuthContext.jsx';
+import {logout} from "../services/authservice.js"
+import { useNavigate } from 'react-router-dom';
 
 function Home(props) {
-    
+    const {setUser} = useAuth()
+    const navigate = useNavigate()
+
+    const handleLogout = async () => {
+        try {
+            const response = await logout()
+
+            console.log(response.data)
+
+            localStorage.removeItem("user")
+            setUser(null)
+            navigate("/login")
+
+        } catch (e) {
+            throw new Error(e.message)
+        }
+        
+    }
     return (
-        <>html</>
+        <div>
+            <button
+                onClick={handleLogout}
+                className='px-4 py-3 w-full rounded-lg mt-4  bg-linear-to-tr from-blue-600 to-pink-400'
+            >
+                Logout
+            </button>
+        </div>
     );
 }
 

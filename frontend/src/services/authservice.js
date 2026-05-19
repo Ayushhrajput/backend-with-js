@@ -47,7 +47,18 @@ const loginUser = async (formdata) => {
     }
 }
 
+const logout = async () => {
+    try {
+        const response = await api.post(
+            "api/v1/users/logout"
+        )
+        return response.data
+    } catch (e) {
+        throw new Error(e.response.data.message || e.message || "something went wrong")
+    }
+}
 export {
     registerUser,
-    loginUser
+    loginUser,
+    logout
 }

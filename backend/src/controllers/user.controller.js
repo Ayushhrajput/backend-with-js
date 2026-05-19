@@ -105,7 +105,8 @@ const loginUser = asyncHandler( async (req, res) => {
 
     const options = {
         httpOnly: true,
-        secure: true
+        secure: true,
+        sameSite: "none"
     }
 
     return res.status(200)
@@ -122,8 +123,8 @@ const logoutUser = asyncHandler( async (req, res) => {
     await User.findByIdAndUpdate(
         req.user._id, 
         {
-           $set: {
-            refreshToken: undefined
+           $unset: {
+            refreshToken: 1
            }
         },
         {
@@ -138,7 +139,7 @@ const logoutUser = asyncHandler( async (req, res) => {
 
     return res.status(200)
     .clearCookie("accessToken", options)
-    .clearCookie("refershToken", options)
+    .clearCookie("refreshToken", options)
     .json(
         new ApiResponse(200, {}, "user logged out")
     )
@@ -156,7 +157,7 @@ const refreshAccessToken = asyncHandler( async (req, res) => {
     
         if(!user) throw new ApiError(401, "INVALID REFERSH TOKEN")
         
-        if(getrefreshToken !== user.refreshToken) {
+        if(getRefreshToken !== user.refreshToken) {
             throw new ApiError(401, "refresh token is expired")
         }
     
@@ -171,12 +172,15 @@ const refreshAccessToken = asyncHandler( async (req, res) => {
         .cookie("accessToken", accessToken)
         .cookie("refreshToken", newRefreshToken)
         .json(
-            200,
-            {
-                accessToken,
-                refreshToken: newRefreshToken
-            },
-            "accessToken refreshed"
+            new ApiResponse(
+                200,
+                {
+                    accessToken,
+                    refreshToken: newRefreshToken
+                },
+                "accessToken refreshed"
+            )
+            
         )
     } catch (error) {
         throw new ApiError(401, error?.message || "invalid refreshToken")
