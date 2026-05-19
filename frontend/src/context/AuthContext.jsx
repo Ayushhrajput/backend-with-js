@@ -1,17 +1,29 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { getCurrUser } from "../services/authservice.js";
+
 
 const AuthContext = createContext()
 
 export const AuthProvider = ({children}) => {
-    const [user, setUser] = useState(
-        () => {
-            const getUser = localStorage.getItem("user")
-            return getUser? JSON.parse(getUser): null
-        }
-    )
+    const [user, setUser] = useState(null)
+    const [loading, setLoading] = useState()
 
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const response = await getCurrUser()
+                setUser(response.data)
+
+            } catch (e) {
+                setUser(null)
+            } finally {
+                setLoading(false)
+            }
+        }
+        fetchUser()
+    }, [])
     return (
-        <AuthContext.Provider value={{user, setUser}}>
+        <AuthContext.Provider value={{user, setUser, loading}}>
             {children}
         </AuthContext.Provider>
     )

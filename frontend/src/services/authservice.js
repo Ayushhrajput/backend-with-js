@@ -5,6 +5,43 @@ const api = axios.create({
     baseURL: API_URL,
     withCredentials: true
 })
+
+const refreshToken = async () => {
+    try {
+        const response = await api.post(
+            "/api/v1/users/refresh-token"
+        )
+        return response.data
+    } catch (e) {
+        throw new Error(e.response.data.message || e.message || "something went wrong")
+    }
+}
+
+api.interceptors.response.use(
+    (response) => (
+        response,
+        async (error) => {
+            const originalRequest = error.config
+
+            if(
+                error.response?.status === 401 && 
+                !originalRequest._retry
+            ) {
+                originalRequest._retry = true
+
+                try {
+                    await refreshToken()
+                    return api(originalRequest)
+                } catch (e) {
+                    return Promise.reject(e)
+                }
+            }
+            return Promise.reject(error)
+            
+        }
+    )
+)
+
 const registerUser = async (formData, avatar, coverImage) => {
     
     try {
@@ -57,8 +94,20 @@ const logout = async () => {
         throw new Error(e.response.data.message || e.message || "something went wrong")
     }
 }
+
+const getCurrUser = async () => {
+    try {
+        const response = await api.post(
+            "api/v1/users/get-user"
+        )
+    } catch (e) {
+        throw new Error(e.response.data.message || e.message || "something went wrong")
+    }
+}
 export {
     registerUser,
     loginUser,
-    logout
+    logout,
+    getCurrUser,
+    refreshToken
 }

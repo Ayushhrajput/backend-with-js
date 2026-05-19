@@ -12,8 +12,6 @@ function Home(props) {
             const response = await logout()
 
             console.log(response.message)
-
-            localStorage.removeItem("user")
             setUser(null)
             navigate("/login")
 

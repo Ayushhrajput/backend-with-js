@@ -9,8 +9,13 @@ import { useAuth } from './context/AuthContext.jsx'
 
 function App() {
   
-  const {user} = useAuth()
+  const {user, loading} = useAuth()
   
+  if(loading) {
+    return (
+      <h1>loading!</h1>
+    )
+  }
 
   return (
       
@@ -18,7 +23,7 @@ function App() {
         
         <Route element={<Layout/>}>
           <Route path='/' element={
-            user? <Navigate to="/login" /> : <Navigate to="/login"/>
+            user? <Navigate to="/home" /> : <Navigate to="/login"/>
             
           }/>
           <Route path='/register' element={<RegisterUser/>}/>

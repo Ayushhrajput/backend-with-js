@@ -28,7 +28,7 @@ function Login(props) {
             const response = await loginUser(formData)
             
             setUser(response.data)
-            localStorage.setItem("user", JSON.stringify(response.data))
+            
             navigate('/home')
 
             setSuccess(response.message)
