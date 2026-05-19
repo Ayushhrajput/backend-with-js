@@ -2,6 +2,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 export const app = express();
+app.set("trust proxy", 1)
 
 
 const allowedOrigins = [
