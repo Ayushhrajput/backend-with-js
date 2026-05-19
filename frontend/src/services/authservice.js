@@ -20,7 +20,7 @@ const registerUser = async (formData, avatar, coverImage) => {
         
         if(coverImage) data.append("coverImage", coverImage)
      
-        const response = await axios.post(
+        const response = await api.post(
             `api/v1/users/register`,
             data,
             
@@ -37,13 +37,13 @@ const registerUser = async (formData, avatar, coverImage) => {
 const loginUser = async (formdata) => {
 
     try {
-        const response = await axios.post(
+        const response = await api.post(
             "api/v1/users/login", 
             formdata,
         )
         return response.data
     } catch (e) {
-        throw new Error(e.response.data.message || e.messaage || "something went wrong")
+        throw new Error(e.response.data.message || e.message || "something went wrong")
     }
 }
 
