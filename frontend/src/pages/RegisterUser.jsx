@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { registerUser } from '../services/authservice.js';
 import { useAuth } from '../context/AuthContext.jsx';
 
 function RegisterUser() {
+    const navigate = useNavigate()
     const {setUser} = useAuth()
 
     const [error, setError] = useState("");
@@ -35,6 +36,8 @@ function RegisterUser() {
                 coverImage
             )
             setUser(response.data)
+            localStorage.setItem("user", JSON.stringify(response.data))
+            navigate('/home')
             setSuccess(response.message)
             setError("")
         } catch (err) {

@@ -29,7 +29,6 @@ function Login(props) {
             
             setUser(response.data)
             localStorage.setItem("user", JSON.stringify(response.data))
-            console.log(localStorage.getItem("user"))
             navigate('/home')
 
             setSuccess(response.message)
