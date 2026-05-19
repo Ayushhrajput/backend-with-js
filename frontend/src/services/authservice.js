@@ -13,34 +13,33 @@ const refreshToken = async () => {
         )
         return response.data
     } catch (e) {
-        throw new Error(e.response.data.message || e.message || "something went wrong")
+        throw new Error(e.response?.data?.message || e.message || "something went wrong")
     }
 }
 
 api.interceptors.response.use(
-    (response) => (
-        response,
-        async (error) => {
-            const originalRequest = error.config
+    (response) => (response),
+    async (error) => {
+        const originalRequest = error.config
 
-            if(
-                error.response?.status === 401 && 
-                !originalRequest._retry
-            ) {
-                originalRequest._retry = true
+        if(
+            error.response?.status === 401 && 
+            !originalRequest._retry
+        ) {
+            originalRequest._retry = true
 
-                try {
-                    await refreshToken()
-                    return api(originalRequest)
-                } catch (e) {
-                    return Promise.reject(e)
-                }
+            try {
+                await refreshToken()
+                return api(originalRequest)
+            } catch (e) {
+                return Promise.reject(e)
             }
-            return Promise.reject(error)
-            
         }
-    )
+        return Promise.reject(error)
+        
+    }
 )
+
 
 const registerUser = async (formData, avatar, coverImage) => {
     
@@ -58,7 +57,7 @@ const registerUser = async (formData, avatar, coverImage) => {
         if(coverImage) data.append("coverImage", coverImage)
      
         const response = await api.post(
-            `api/v1/users/register`,
+            `/api/v1/users/register`,
             data,
             
         )
@@ -75,19 +74,19 @@ const loginUser = async (formdata) => {
 
     try {
         const response = await api.post(
-            "api/v1/users/login", 
+            "/api/v1/users/login", 
             formdata,
         )
         return response.data
     } catch (e) {
-        throw new Error(e.response.data.message || e.message || "something went wrong")
+        throw new Error(e.response?.data?.message || e.message || "something went wrong")
     }
 }
 
 const logout = async () => {
     try {
         const response = await api.post(
-            "api/v1/users/logout"
+            "/api/v1/users/logout"
         )
         return response.data
     } catch (e) {
@@ -98,10 +97,10 @@ const logout = async () => {
 const getCurrUser = async () => {
     try {
         const response = await api.post(
-            "api/v1/users/get-user"
+            "/api/v1/users/get-user"
         )
     } catch (e) {
-        throw new Error(e.response.data.message || e.message || "something went wrong")
+        throw new Error(e.response?.data?.message || e.message || "something went wrong")
     }
 }
 export {
