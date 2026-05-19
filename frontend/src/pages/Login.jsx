@@ -28,8 +28,10 @@ function Login(props) {
             const response = await loginUser(formData)
             
             setUser(response.data)
-            console.log(response.data)
+            localStorage.setItem("user", JSON.stringify(response.data))
+            console.log(localStorage.getItem("user"))
             navigate('/home')
+
             setSuccess(response.message)
             setError("")
         } catch (e) {
