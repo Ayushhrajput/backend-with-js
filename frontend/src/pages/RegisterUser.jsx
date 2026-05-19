@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { registerUser } from '../services/authservice.js';
+import { useAuth } from '../context/AuthContext.jsx';
 
 function RegisterUser() {
+    const {setUser} = useAuth()
 
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("")
@@ -31,16 +34,17 @@ function RegisterUser() {
                 avatar,
                 coverImage
             )
-            console.log("response", response)
+            setUser(response.data)
             setSuccess(response.message)
+            setError("")
         } catch (err) {
-            console.log("this err", err)
             setError(err.message)
+            setSuccess("")
         }
     }
 
     return (
-        <div className="min-h-screen w-full bg-gradient-to-br from-gray-100 to-gray-200 flex justify-center items-center px-4">
+        <div className="min-h-screen w-full bg-gradient-to-br from-gray-50 to-gray-100 flex justify-center items-center px-4">
 
             <div className="w-full max-w-md h-min shadow-2xl rounded-2xl bg-white p-8">
                 <h1 className="text-3xl font-bold text-center text-gray-800 mb-2">
@@ -50,27 +54,27 @@ function RegisterUser() {
                 <p className="text-gray-500 text-center mb-8">
                     Register to continue
                 </p>
-                <form className="flex flex-col gap-5 " onSubmit={handleSubmit}>
+                <form className="flex flex-col gap-4 " onSubmit={handleSubmit}>
                     <input 
-                        className="w-full bg-gray-100  border border-gray-200 rounded-xl px-4 py-3 outline-none  "
+                        className="w-full bg-gray-100   rounded-xl px-4 py-3 outline-none  "
                         type="text"
                         name='fullName'
                         placeholder='Full Name'
                         onChange={handleChange}/>
                     <input 
-                        className="w-full bg-gray-100  border border-gray-200 rounded-xl px-4 py-3 outline-none "
+                        className="w-full bg-gray-100   rounded-xl px-4 py-3 outline-none "
                         type="text" 
                         name='username' 
                         placeholder='Username'
                         onChange={handleChange}/>
                     <input 
-                        className="w-full bg-gray-100  border border-gray-200 rounded-xl px-4 py-3 outline-none " 
+                        className="w-full bg-gray-100   rounded-xl px-4 py-3 outline-none " 
                         type="text" 
                         name='email' 
                         placeholder='Email'
                         onChange={handleChange}/>
                     <input 
-                        className="w-full bg-gray-100  border border-gray-200 rounded-xl px-4 py-3 outline-none " 
+                        className="w-full bg-gray-100   rounded-xl px-4 py-3 outline-none " 
                         type="text" 
                         name='password'
                         placeholder='Password' 
@@ -88,8 +92,7 @@ function RegisterUser() {
                                 w-full
                                 text-sm
                                 text-gray-500
-                                border
-                                border-gray-300
+                                
                                 rounded-xl
                                 cursor-pointer
                                 bg-gray-50
@@ -121,8 +124,7 @@ function RegisterUser() {
                                 w-full
                                 text-sm
                                 text-gray-500
-                                border
-                                border-gray-300
+                                
                                 rounded-xl
                                 cursor-pointer
                                 bg-gray-50
@@ -154,6 +156,7 @@ function RegisterUser() {
                             shadow-lg
                         "
                         type="submit">Register</button>
+                        
                         {error && 
                         (<p className='text-red-500 text-sm mt-2'>
                             {error}
@@ -164,6 +167,15 @@ function RegisterUser() {
                             {success}
                         </p>
                         }
+                        <div className='flex gap-2 mt-4 text-center text-sm'>
+                            <p className=''>Have an account</p>
+                            <Link
+                                to="/login"
+                                className='italic hover:underline text-gray-600'
+                            >
+                                Login
+                            </Link>
+                        </div>
                 </form>
             </div>
         </div>
