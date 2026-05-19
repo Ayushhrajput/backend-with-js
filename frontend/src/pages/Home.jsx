@@ -24,9 +24,10 @@ function Home(props) {
     }
     return (
         <div>
+
             <button
                 onClick={handleLogout}
-                className='px-4 py-3 w-full rounded-lg mt-4  bg-linear-to-tr from-blue-600 to-pink-400'
+                className='px-4 py-3 w-full rounded-lg mt-4  bg-linear-to-tr from-blue-600 to-pink-400 text-white text-bold  hover:bg-linear-to-tr hover:from-blue-400 hover:to-pink-600 transition duration-200 '
             >
                 Logout
             </button>
