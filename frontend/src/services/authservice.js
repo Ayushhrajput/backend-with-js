@@ -20,7 +20,7 @@ const registerUser = async (formData, avatar, coverImage) => {
         
         if(coverImage) data.append("coverImage", coverImage)
      
-        const response = await api.post(
+        const response = await axios.post(
             `api/v1/users/register`,
             data,
             
@@ -37,7 +37,7 @@ const registerUser = async (formData, avatar, coverImage) => {
 const loginUser = async (formdata) => {
 
     try {
-        const response = await api.post(
+        const response = await axios.post(
             "api/v1/users/login", 
             formdata,
         )
@@ -49,7 +49,7 @@ const loginUser = async (formdata) => {
 
 const logout = async () => {
     try {
-        const response = await api.post(
+        const response = await axios.post(
             "api/v1/users/logout"
         )
         return response.data

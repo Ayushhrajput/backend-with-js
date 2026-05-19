@@ -11,7 +11,7 @@ function Home(props) {
         try {
             const response = await logout()
 
-            console.log(response.data)
+            console.log(response.message)
 
             localStorage.removeItem("user")
             setUser(null)
@@ -23,11 +23,11 @@ function Home(props) {
         
     }
     return (
-        <div>
+        <div className='w-full flex items-center justify-center'>
 
             <button
                 onClick={handleLogout}
-                className='px-4 py-3 w-full rounded-lg mt-4  bg-linear-to-tr from-blue-600 to-pink-400 text-white text-bold  hover:bg-linear-to-tr hover:from-blue-400 hover:to-pink-600 transition duration-200 '
+                className='px-8 py-3 mx-4 max-w-sm rounded-lg mt-4  bg-linear-to-tl from-blue-600 to-pink-400 text-white text-bold  '
             >
                 Logout
             </button>
