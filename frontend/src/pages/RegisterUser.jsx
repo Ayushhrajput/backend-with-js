@@ -35,7 +35,7 @@ function RegisterUser() {
                 avatar,
                 coverImage
             )
-            setUser(response.data)
+            setUser(response.data.user)
             navigate('/home')
             setSuccess(response.message)
             setError("")
@@ -106,7 +106,7 @@ function RegisterUser() {
                                 file:border-0
                                 file:text-sm
                                 file:font-semibold
-                                file:bg-blue-600
+                                file:bg-blue-500
                                 
                                 file:text-white
                                 hover:file:bg-gray-800
@@ -139,7 +139,7 @@ function RegisterUser() {
                                 file:border-0
                                 file:text-sm
                                 file:font-semibold
-                                file:bg-blue-600
+                                file:bg-blue-500
                                 file:text-white
                                 hover:file:bg-gray-800
                             "
@@ -148,7 +148,7 @@ function RegisterUser() {
                     <button 
                         className="
                             w-full
-                            bg-linear-to-tl from-blue-600 to-pink-400
+                            bg-linear-to-tl from-red-500 to-red-400
                             hover:bg-gray-800
                             text-white
                             font-semibold

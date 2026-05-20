@@ -27,7 +27,7 @@ function Login(props) {
         try {
             const response = await loginUser(formData)
             
-            setUser(response.data)
+            setUser(response.data.user)
             
             navigate('/home')
 
@@ -70,7 +70,7 @@ function Login(props) {
                     <button 
                         className="
                             w-full
-                            bg-linear-to-tl from-blue-600 to-pink-400
+                            bg-linear-to-tl from-red-500 to-red-400
                             hover:bg-gray-800
                             text-white
                             font-semibold

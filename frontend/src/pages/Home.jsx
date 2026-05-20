@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 function Home(props) {
     const {user, setUser} = useAuth()
     const navigate = useNavigate()
-    console.log(user)
+    
     const handleLogout = async () => {
         try {
             const response = await logout()
@@ -20,13 +20,20 @@ function Home(props) {
         }
         
     }
+    
+    if(!user) {
+        return (
+            <div>Fething user details</div>
+        )
+    }
+    
     return (
         <div className='w-full h-screen flex flex-col items-center justify-center bg-linear-to-br from-gray-50 to-gray-100 '>
-            <div className='max-w-sm flex flex-col  items-start gap-4 bg-white p-8 rounded-lg shadow-2xl mx-4'>
-                <div className='w-full h-15 rounded-lg overflow-hidden   '>
-                    <img src={user.coverImage} alt=""  className='w-full h-full object-cover '/>
+            <div className='max-w-sm flex flex-col  items-start gap-4 bg-white  rounded-lg shadow-2xl mx-4'>
+                <div className='w-full  h-25 rounded-lg overflow-hidden  '>
+                    <img src={user.coverImage} alt=""  className='w-sm h-full object-cover '/>
                 </div>
-                <div className='flex justify-center items-top gap-4'>
+                <div className='flex justify-center items-top gap-4 px-4'>
                     <div className='w-25 h-25 rounded-full overflow-hidden   '>
                         <img src={user.avatar} alt="" className='w-full h-full object-cover'/>
                     </div>
@@ -36,7 +43,7 @@ function Home(props) {
                 </div>
                 <button
                     onClick={handleLogout}
-                    className='px-8 py-3  max-w-sm rounded-lg   bg-linear-to-tl from-blue-600 to-pink-400 text-white text-bold  '
+                    className='px-8 py-3  max-w-sm rounded-lg   bg-linear-to-tl from-red-500 to-red-400 text-white text-bold  mx-4 my-2'
                 >
                     Logout
                 </button>
