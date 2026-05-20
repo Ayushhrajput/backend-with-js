@@ -20,7 +20,7 @@ function Home(props) {
         }
         
     }
-    
+    console.log(user)
     if(!user) {
         return (
             <div>Fething user details</div>
@@ -38,7 +38,8 @@ function Home(props) {
                         <img src={user.avatar} alt="" className='w-full h-full object-cover'/>
                     </div>
                     <div className='mt-4'>
-                        <h4>{user.username}</h4>
+                        <h1 className='font-bold'>@{user.username}</h1>
+                        <h6>{user.fullName}</h6>
                     </div>
                 </div>
                 <button

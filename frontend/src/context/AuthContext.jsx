@@ -13,7 +13,7 @@ export const AuthProvider = ({children}) => {
             try {
                 const response = await getCurrUser()
                 
-                setUser(response.data.user)
+                setUser(response.data)
 
             } catch (e) {
                 setUser(null)
