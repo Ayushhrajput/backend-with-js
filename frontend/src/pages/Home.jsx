@@ -29,11 +29,11 @@ function Home(props) {
     
     return (
         <div className='w-full h-screen flex flex-col items-center justify-center bg-linear-to-br from-gray-50 to-gray-100 '>
-            <div className='max-w-sm flex flex-col  items-start gap-4 bg-white  rounded-lg shadow-2xl mx-4'>
-                <div className='w-full  h-25 rounded-lg overflow-hidden  '>
+            <div className='max-w-sm flex flex-col  items-start gap-4 bg-white  rounded-lg shadow-2xl mx-4  overflow-hidden'>
+                {user.coverImage?<div className='w-full  h-25 overflow-hidden  '>
                     <img src={user.coverImage} alt=""  className='w-sm h-full object-cover '/>
-                </div>
-                <div className='flex justify-center items-top gap-4 px-4'>
+                </div>: ""}
+                <div className='flex justify-center items-top gap-4 p-4'>
                     <div className='w-25 h-25 rounded-full overflow-hidden   '>
                         <img src={user.avatar} alt="" className='w-full h-full object-cover'/>
                     </div>
