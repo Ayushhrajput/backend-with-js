@@ -81,69 +81,46 @@ function RegisterUser() {
                         name='password'
                         placeholder='Password' 
                         onChange={handleChange}/>
+                    <div className='flex justify-between'>
+                        <div className="flex flex-col ">
+                            <label className="text-sm font-medium text-gray-700">
+                                Avatar
+                            </label>
+                            <label 
+                                htmlFor="avatar"
+                                className={`h-10 ${!avatar? "w-10": "w-full"} cursor-pointer flex justify-center  items-center ${!avatar?"bg-blue-500 text-white": "bg-gray-100"} rounded-lg overflow-hidden`}
+                            >
+                                {!avatar?<i class="fa-solid fa-file w-full"></i>: <div className='w-1/2 truncate'>{avatar.name}</div>}
+                            </label>
+                            <input
+                                id='avatar'
+                                type="file"
+                                onChange={(e) => setAvatar(e.target.files[0])}
+                                className="
+                                    hidden
+                                "
+                            />
+                        </div>
+                        <div className="flex flex-col">
+                            <label className="text-sm font-medium text-gray-700">
+                                Cover Image (optional)
+                            </label>
+                            <label 
+                                htmlFor="coverImage"
+                                className={`h-10 ${!coverImage? "w-10": "w-25"} cursor-pointer flex justify-center items-center ${!coverImage?"bg-blue-500 text-white": "bg-gray-100"} rounded-lg overflow-hidden `}
+                            >
+                                {!coverImage?<i class="fa-solid fa-file w-full"></i>: <div className='w-1/2 truncate'>{coverImage.name}</div>}
+                            </label>
+                            <input
+                                id='coverImage'
+                                type="file"
+                                onChange={(e) => setCoverImage(e.target.files[0])}
+                                className="
+                                     hidden
+                                "
+                            />
+                        </div>
 
-                    <div className="flex flex-col gap-2">
-                        <label className="text-sm font-medium text-gray-700">
-                            Avatar
-                        </label>
-
-                        <input
-                            type="file"
-                            onChange={(e) => setAvatar(e.target.files[0])}
-                            className="
-                                w-full
-                                text-sm
-                                text-gray-500
-                                
-                                rounded-xl
-                                cursor-pointer
-                                bg-gray-50
-                                p-2
-                                file:mr-4
-                                file:py-2
-                                file:px-4
-                                file:rounded-lg
-                                file:border-0
-                                file:text-sm
-                                file:font-semibold
-                                file:bg-blue-500
-                                
-                                file:text-white
-                                hover:file:bg-gray-800
-                            "
-                        />
-                    </div>
-
-                    
-                    <div className="flex flex-col gap-2">
-                        <label className="text-sm font-medium text-gray-700">
-                            Cover Image
-                        </label>
-
-                        <input
-                            type="file"
-                            onChange={(e) => setCoverImage(e.target.files[0])}
-                            className="
-                                w-full
-                                text-sm
-                                text-gray-500
-                                
-                                rounded-xl
-                                cursor-pointer
-                                bg-gray-50
-                                p-2
-                                file:mr-4
-                                file:py-2
-                                file:px-4
-                                file:rounded-lg
-                                file:border-0
-                                file:text-sm
-                                file:font-semibold
-                                file:bg-blue-500
-                                file:text-white
-                                hover:file:bg-gray-800
-                            "
-                        />
                     </div>
                     <button 
                         className="
@@ -160,26 +137,26 @@ function RegisterUser() {
                         "
                         type="submit">Register</button>
                         
-                        {error && 
-                        (<p className='text-red-500 text-sm mt-2'>
-                            {error}
-                        </p>)
-                        }
-                        {success && 
-                        <p className='text-sm mt-2'>
-                            {success}
-                        </p>
-                        }
-                        <div className='flex gap-2 mt-4 text-center text-sm'>
-                            <p className=''>Have an account</p>
-                            <Link
-                                to="/login"
-                                className='italic hover:underline text-gray-600'
-                            >
-                                Login
-                            </Link>
-                        </div>
                 </form>
+                {error && 
+                (<p className='text-red-500 text-sm mt-2'>
+                    {error}
+                </p>)
+                }
+                {success && 
+                <p className='text-sm mt-2'>
+                    {success}
+                </p>
+                }
+                <div className='flex gap-2 mt-4 text-center text-sm'>
+                    <p className=''>Have an account</p>
+                    <Link
+                        to="/login"
+                        className='italic hover:underline text-gray-600'
+                    >
+                        Login
+                    </Link>
+                </div>
             </div>
         </div>
     );
