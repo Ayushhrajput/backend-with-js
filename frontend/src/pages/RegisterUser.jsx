@@ -40,6 +40,7 @@ function RegisterUser() {
             setUser(response.data.user)
             navigate('/home')
             setSuccess(response.message)
+            console.log(avatar)
             setError("")
         } catch (err) {
             setError(err.message)
