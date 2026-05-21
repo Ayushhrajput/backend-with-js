@@ -7,7 +7,7 @@ import { useTheme } from '../context/ThemeContext.jsx';
 function RegisterUser() {
     const navigate = useNavigate()
     const {setUser} = useAuth()
-    const {darkTheme, setDarkTheme} = useTheme()
+    
 
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("")
