@@ -90,7 +90,7 @@ function RegisterUser() {
                                 htmlFor="avatar"
                                 className={`h-10 ${!avatar? "w-10": "w-full"} cursor-pointer flex justify-center  items-center ${!avatar?"bg-blue-500 text-white": "bg-gray-100"} rounded-lg overflow-hidden`}
                             >
-                                {!avatar?<i class="fa-solid fa-file w-full"></i>: <div className='w-1/2 truncate'>{avatar.name}</div>}
+                                {!avatar?<i class="fa-solid fa-file w-full"></i>: <div className='w-25 truncate'>{avatar.name}</div>}
                             </label>
                             <input
                                 id='avatar'
@@ -109,7 +109,7 @@ function RegisterUser() {
                                 htmlFor="coverImage"
                                 className={`h-10 ${!coverImage? "w-10": "w-25"} cursor-pointer flex justify-center items-center ${!coverImage?"bg-blue-500 text-white": "bg-gray-100"} rounded-lg overflow-hidden `}
                             >
-                                {!coverImage?<i class="fa-solid fa-file w-full"></i>: <div className='w-1/2 truncate'>{coverImage.name}</div>}
+                                {!coverImage?<i class="fa-solid fa-file w-full"></i>: <div className='w-25 truncate'>{coverImage.name}</div>}
                             </label>
                             <input
                                 id='coverImage'
