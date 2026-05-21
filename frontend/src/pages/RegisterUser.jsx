@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { registerUser } from '../services/authservice.js';
 import { useAuth } from '../context/AuthContext.jsx';
+import { useTheme } from '../context/ThemeContext.jsx';
 
 function RegisterUser() {
     const navigate = useNavigate()
     const {setUser} = useAuth()
+    const {darkTheme, setDarkTheme} = useTheme()
 
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("")
