@@ -2,9 +2,12 @@ import React from 'react';
 import { useAuth } from '../context/AuthContext.jsx';
 import {logout} from "../services/authservice.js"
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '../context/ThemeContext.jsx';
 
 function Home(props) {
     const {user, setUser} = useAuth()
+    const {darkTheme, setDarkTheme} = useTheme()
+    console.log(darkTheme)
     const navigate = useNavigate()
     
     const handleLogout = async () => {
@@ -29,7 +32,7 @@ function Home(props) {
     
     return (
         <div className='w-full h-screen flex flex-col items-center justify-center bg-linear-to-br from-gray-50 to-gray-100 '>
-            <div className='max-w-sm flex flex-col  items-start gap-4 bg-white  rounded-lg shadow-2xl mx-4  overflow-hidden'>
+            <div className={`max-w-sm flex flex-col  items-start gap-4 ${darkTheme? "bg-black/90 text-white": "bg-white"}  rounded-lg shadow-2xl mx-4  overflow-hidden`}>
                 {user.coverImage?<div className='w-full  h-25 overflow-hidden  '>
                     <img src={user.coverImage} alt=""  className='w-sm h-full object-cover '/>
                 </div>: ""}
@@ -48,6 +51,14 @@ function Home(props) {
                 >
                     Logout
                 </button>
+                <label htmlFor='theme' className={`${darkTheme? "bg-gray-800 ": "bg-gray-100 items-baseline-last"} w-10 h-10 flex justify-center  rounded-lg`}>
+                    {!darkTheme?
+                        <span className={`material-symbols-outlined -translate-y-2  transition duration-200`}>light_mode</span>: 
+                        <span className={`material-symbols-outlined translate-y-2  transition duration-200`}>dark_mode</span>}
+                </label>
+                <input id='theme' className='hidden' type="checkbox" onChange={() => (
+                    !darkTheme?setDarkTheme(true): setDarkTheme(false)
+                )}/>
             </div>
         </div>
     );

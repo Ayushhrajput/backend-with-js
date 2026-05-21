@@ -7,9 +7,15 @@ const VideoSchema = new Schema(
             type: String, // cloudinary url
             required: true
         },
+        videoFilePublicId: {
+            type: String
+        },
         thumbnail: {
             type: String, // cloudinary url
             required: true
+        },
+        thumbnailPublicId: {
+            type: String
         },
         title: {
             type: String,
@@ -27,8 +33,8 @@ const VideoSchema = new Schema(
             type: Number,
             default: 0,
         },
-        idPublised: {
-            type: String,
+        isPublised: {
+            type: Boolean,
             default: true
         },
         owner: {

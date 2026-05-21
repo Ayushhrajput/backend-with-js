@@ -3,10 +3,13 @@ import { loginUser } from '../services/authservice';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useTheme } from '../context/ThemeContext.jsx';
 
 function Login(props) {
     const {user, setUser} = useAuth()
+    const {darkTheme, setDarkTheme} = useTheme()
     const navigate = useNavigate()
+    
 
     const [formData, setFormData] = useState({
         email: "",
